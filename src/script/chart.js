@@ -14,6 +14,8 @@ Chart.prototype = {
       var loginMap = document.getElementsByClassName('loginwrap')[0]
       var chartMap = document.getElementsByClassName('chartwrap')[0]
       var login = document.getElementById('loginBtn')
+      var inputArea = document.getElementById('inputArea')
+      var colorBtn = document.getElementById('colorStyle')
       var send = document.getElementById('sendBtn')
       //建立到服务器的连接
       _this.socket = io.connect()
@@ -33,27 +35,34 @@ Chart.prototype = {
         }
       }
 
+      colorBtn.onchange = function() {
+         inputArea.style.color = colorBtn.value
+      }
+
       send.onclick = function() {
-         var msg = document.getElementById('inputArea').value
+         var msg = inputArea.value
          if(msg.trim().length > 0) {
-            _this.socket.emit('postMsg',msg)
+            _this.socket.emit('postMsg',msg,colorBtn.value)
          }
       }
 
       _this.socket.on('nickExisted', function() {
            document.getElementsByTagName('h4')[0].textContent = '名称被占用'; //显示昵称被占用的提示
        })
+
        _this.socket.on('loginSuccess', function() {
             loginMap.style.display = 'none'
             chartMap.style.display = 'block'
        })
+
        _this.socket.on('system',function(nickname,usersCount,type) {
            var msg = nickname + '  ' + (type === 'login'? '入池' : '出池')
            _this.printMsg('system',msg,'#FE4E4E')
            document.getElementById('userCount').textContent = '{' + usersCount + 'online' + '}'
        })
-       _this.socket.on('getMsg',function(obj,msg) {
-         _this.printMsg(obj,msg)
+
+       _this.socket.on('getMsg',function(obj,msg,color) {
+         _this.printMsg(obj,msg,color)
        })
    },
    printMsg: function(obj,msg,color) {

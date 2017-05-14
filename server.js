@@ -26,6 +26,7 @@ function start() {
 
    //数据存储
    var users = []
+   
    //socket部分
    socket.on('connection', function(client) {
        //接收并处理客户端发送的login事件
@@ -43,10 +44,17 @@ function start() {
             socket.sockets.emit('system',data,users.length,'login')
            }
        })
+
+       //客户端断开连接
        client.on('disconnect',function() {
           users.splice(client.pos,1)
           //通知除自己以外的客户端“自己退出聊天”
           client.broadcast.emit('system',client.nickname,users.length,'logout')
+       })
+
+       //客户端发送消息
+       client.on('postMsg',function(data,color) {
+          socket.sockets.emit('getMsg',client.nickname,data,color)
        })
    })
 }
