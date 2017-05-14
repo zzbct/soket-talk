@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+</head>
+<style>
+   .loginwrap {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      padding: 50px;
+      width:400px;
+      height: 300px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      background: url(/resource/index.jpg);
+      filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+      -moz-background-size:100% 100%;
+      background-size:100% 100%;
+   }
+   h4 {
+      color: white;
+   }
+   .login input {
+      float: left;
+      box-sizing: border-box;
+      padding: 5px;
+      height: 30px;
+      border: none;
+      color: brown;
+   }
+   .login button {
+      float: left;
+      box-sizing: border-box;
+      padding: 5px;
+      height: 30px;
+      background: white;
+      border: none;
+      color: brown;
+   }
+</style>
+<body>
+   <div class='loginwrap'>
+      <div class="login">
+         <h4>欢迎进入Candy程的聊天园</h4>
+         <input id="nickname" type="text" placeholder="大侠留名">
+         <button id="loginBtn">入园</input>
+      </div>
+   </div>
+   <div class="chartwrap">
+      ok
+   </div>
+ </body>
+<script src = 'socket.io/socket.io.js'> </script>
+<script src='script/chart.js'></script>
+</html>
