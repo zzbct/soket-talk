@@ -93,6 +93,9 @@
      overflow-y: auto;
    }
 
+   .imgs {
+      max-width: 99%;
+   }
    .controls {
       width: 100%;
    }
@@ -118,13 +121,14 @@
       background-size:100% 100%;
    }
 
-   .imgLable {
+   #imgLable {
         position: relative;
     }
 
-    .imgLable button {
+    #imgLable button {
          width: 25px;
          height: 25px;
+         disabled: true;
          background: url(resource/img.jpg);
          filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
          -moz-background-size:100% 100%;
@@ -133,8 +137,9 @@
 
     #fileImg {
         position: absolute;
-        width: 30px;
+        width: 50px;
         left: 0;
+        top: 0;
         opacity: 0;
         overflow: hidden;
     }
@@ -179,9 +184,9 @@
                   <div>
                        <input id="colorStyle" type="color" placeHolder='#000' title="font color" />
                       <button id="emoji"></button>
-                      <label for="fileImg" class="imgLable">
+                      <label for="fileImg" id="imgLable">
                             <button></button>
-                            <input id="fileImg" accept='image/*' type="file"/>
+                            <input id="fileImg" type="file"/>
                       </label>
                   </div>
                   <button id="clearBtn">清空聊天池</button>

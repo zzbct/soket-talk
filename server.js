@@ -56,6 +56,11 @@ function start() {
        client.on('postMsg',function(data,color) {
           socket.sockets.emit('getMsg',client.nickname,data,color)
        })
+
+       //客户端发送图片
+       client.on('postImg',function(data,color) {
+          socket.sockets.emit('getImg',client.nickname,data,color)
+       })
    })
 }
 
