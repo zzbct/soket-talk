@@ -1,7 +1,7 @@
 
 window.onload = function() {
-   var chart = new Chart()
-   chart.init()
+  var chart = new Chart()
+  chart.init()
 }
 
 var Chart = function() {
@@ -11,6 +11,7 @@ var Chart = function() {
 Chart.prototype = {
    init: function() {
       var _this = this
+      var color = ['#24284B','#C26553','#E1DF2D','#13B0E3','#FE4E4E','#1AC853']
       //建立到服务器的连接
       _this.socket = io.connect()
        document.getElementsByClassName('chartwrap')[0].style.display = 'none'
@@ -34,6 +35,14 @@ Chart.prototype = {
        _this.socket.on('loginSuccess', function() {
             document.getElementsByClassName('loginwrap')[0].style.display = 'none'
             document.getElementsByClassName('chartwrap')[0].style.display = 'block'
+       })
+       _this.socket.on('system',function(nickname,usersCount,type) {
+           var msg = nickname + '  ' + (type === 'login'? '入池' : '出池')
+           var p = document.createElement('p')
+           p.textContent = msg
+           p.style.color = color[Math.floor(Math.random()*color.length)]
+           document.getElementById('msgPool').appendChild(p)
+           document.getElementById('userCount').textContent = '{' + usersCount + 'online' + '}'
        })
    }
 }

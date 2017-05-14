@@ -1,0 +1,6 @@
+button,
+textarea {
+   background: none;
+   border: none;
+   box-sizing: border-box;
+}

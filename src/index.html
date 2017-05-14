@@ -19,9 +19,11 @@
       -moz-background-size:100% 100%;
       background-size:100% 100%;
    }
-   h4 {
+
+   .login h4 {
       color: white;
    }
+
    .login input {
       float: left;
       box-sizing: border-box;
@@ -30,6 +32,7 @@
       border: none;
       color: brown;
    }
+
    .login button {
       float: left;
       box-sizing: border-box;
@@ -39,17 +42,155 @@
       border: none;
       color: brown;
    }
+
+   .chartwrap {
+      position: absolute;
+      width:400px;
+      height: 300px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      background: url(/resource/beauty.jpg);
+      filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+      -moz-background-size:100% 100%;
+      background-size:100% 100%;
+   }
+
+   .chartwrap {
+      position: absolute;
+      width:600px;
+      height: auto;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      background:  #FED8B1;
+   }
+
+   .banner {
+      display: flex;
+      justify-content: space-between;
+      height: 80px;
+      line-height: 80px;
+      background-color: #FF4347;
+   }
+
+   .banner span {
+      padding-left: 10px;
+      font-size: 20px;
+      font-weight: 900;
+   }
+
+   .banner img{
+      width: 80px;
+      height: 80px;
+   }
+
+   .pool {
+     box-sizing: border-box;
+     padding: 10px 20px;
+     width: 100%;
+     height: 400px;
+     overflow-y: auto;
+   }
+
+   .controls {
+      width: 100%;
+   }
+   .items {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+   }
+   input[type = 'color'] {
+     width: 25px;
+     height: 30px;
+     border: none;
+     background: none;
+     padding: 0;
+   }
+
+   #emoji {
+      width: 25px;
+      height: 25px;
+      background: url(resource/emoji.jpg);
+      filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+      -moz-background-size:100% 100%;
+      background-size:100% 100%;
+   }
+
+   .imgLable {
+        position: relative;
+    }
+
+    .imgLable button {
+         width: 25px;
+         height: 25px;
+         background: url(resource/img.jpg);
+         filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+         -moz-background-size:100% 100%;
+         background-size:100% 100%;
+    }
+
+    #fileImg {
+        position: absolute;
+        width: 30px;
+        left: 0;
+        opacity: 0;
+        overflow: hidden;
+    }
+
+    #clearBtn {
+        color: #1E223D;
+    }
+
+    #inputArea {
+        width: 100%;
+        padding: 10px;
+    }
+    #sendBtn {
+        float: right;
+        color: #FED8B1;
+        padding: 5px 20px;
+        background: #FF4347;
+    }
 </style>
+<link rel="stylesheet" href="style/common.css">
 <body>
    <div class='loginwrap'>
       <div class="login">
-         <h4>欢迎进入Candy程的聊天园</h4>
+         <h4>欢迎进入Candy程的聊天池</h4>
          <input id="nickname" type="text" placeholder="大侠留名">
-         <button id="loginBtn">入园</input>
+         <button id="loginBtn">入池</input>
       </div>
    </div>
-   <div class="chartwrap">
-      ok
+    <div class="chartwrap">
+           <div class="banner">
+                 <span>Candy程的聊天池<span id="userCount"></span></span>
+                 <img src="resource/beauty.jpg">
+           </div>
+
+            <!--聊天鱼塘-->
+           <div class="pool" id="msgPool"></div>
+
+           <hr>
+           <!--输入区-->
+           <div class="controls" >
+              <div class="items">
+                  <div>
+                       <input id="colorStyle" type="color" placeHolder='#000' title="font color" />
+                      <button id="emoji"></button>
+                      <label for="fileImg" class="imgLable">
+                            <button></button>
+                            <input id="fileImg" accept='image/*' type="file"/>
+                      </label>
+                  </div>
+                  <button id="clearBtn">清空聊天池</button>
+              </div>
+              <textarea id="inputArea" placeHolder="enter to send"></textarea>
+              <button id="sendBtn">发送</button>
+              <!-- <div id="emojiWrapper"></div> -->
+          </div>
+       </div>
    </div>
  </body>
 <script src = 'socket.io/socket.io.js'> </script>

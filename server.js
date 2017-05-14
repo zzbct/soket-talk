@@ -35,14 +35,20 @@ function start() {
             client.emit('nickExisted')
            }
            else {
+            client.pos = users.length
+            client.nickname = data
             users.push(data)
             client.emit('loginSuccess')
             //向所有连接到服务器的客户端发送事件
-            socket.sockets.emit('system',data)
+            socket.sockets.emit('system',data,users.length,'login')
            }
        })
+       client.on('disconnect',function() {
+          users.splice(client.pos,1)
+          //通知除自己以外的客户端“自己退出聊天”
+          client.broadcast.emit('system',client.nickname,users.length,'logout')
+       })
    })
-   
 }
 
 exports.start = start
