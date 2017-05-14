@@ -1,0 +1,16 @@
+{
+  "name": "epress_socket.io_chartroom",
+  "version": "1.0.0",
+  "description": "聊天室",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^2.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Candy程",
+  "license": "ISC"
+}
