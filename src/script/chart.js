@@ -11,11 +11,14 @@ var Chart = function() {
 Chart.prototype = {
    init: function() {
       var _this = this
-      var color = ['#24284B','#C26553','#E1DF2D','#13B0E3','#FE4E4E','#1AC853']
+      var loginMap = document.getElementsByClassName('loginwrap')[0]
+      var chartMap = document.getElementsByClassName('chartwrap')[0]
+      var login = document.getElementById('loginBtn')
+      var send = document.getElementById('sendBtn')
       //建立到服务器的连接
       _this.socket = io.connect()
-       document.getElementsByClassName('chartwrap')[0].style.display = 'none'
-      var login = document.getElementById('loginBtn')
+      chartMap.style.display = 'none'
+
       login.onclick = function() {
          var nickname = document.getElementById('nickname').value
          //检查昵称是否为空
@@ -29,20 +32,35 @@ Chart.prototype = {
            alert('大侠,请留名！！')
         }
       }
+
+      send.onclick = function() {
+         var msg = document.getElementById('inputArea').value
+         if(msg.trim().length > 0) {
+            _this.socket.emit('postMsg',msg)
+         }
+      }
+
       _this.socket.on('nickExisted', function() {
            document.getElementsByTagName('h4')[0].textContent = '名称被占用'; //显示昵称被占用的提示
        })
        _this.socket.on('loginSuccess', function() {
-            document.getElementsByClassName('loginwrap')[0].style.display = 'none'
-            document.getElementsByClassName('chartwrap')[0].style.display = 'block'
+            loginMap.style.display = 'none'
+            chartMap.style.display = 'block'
        })
        _this.socket.on('system',function(nickname,usersCount,type) {
            var msg = nickname + '  ' + (type === 'login'? '入池' : '出池')
-           var p = document.createElement('p')
-           p.textContent = msg
-           p.style.color = color[Math.floor(Math.random()*color.length)]
-           document.getElementById('msgPool').appendChild(p)
+           _this.printMsg('system',msg,'#FE4E4E')
            document.getElementById('userCount').textContent = '{' + usersCount + 'online' + '}'
        })
+       _this.socket.on('getMsg',function(obj,msg) {
+         _this.printMsg(obj,msg)
+       })
+   },
+   printMsg: function(obj,msg,color) {
+      var p = document.createElement('p')
+      var date = new Date().toTimeString().substr(0,8)
+      p.innerHTML = obj + '(' + date + '):  ' + msg
+      p.style.color = color || '#24284B'
+      document.getElementById('msgPool').appendChild(p)
    }
 }
