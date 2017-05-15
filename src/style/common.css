@@ -4,3 +4,8 @@ textarea {
    border: none;
    box-sizing: border-box;
 }
+
+hr {
+ -webkit-margin-before: 0em;
+ -webkit-margin-after: 0em;
+}

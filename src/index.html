@@ -93,6 +93,17 @@
      overflow-y: auto;
    }
 
+   p img {
+      width: 40px;
+      height: 40px;
+      transition: .1s transform;
+      transform: translateZ(0);
+   }
+   p img:hover {
+      transform: scale(2, 2);
+      transition: .3s transform;
+   }
+
    .imgs {
       max-width: 99%;
    }
@@ -112,7 +123,7 @@
      padding: 0;
    }
 
-   #emoji {
+   #emojiBtn {
       width: 25px;
       height: 25px;
       background: url(resource/emoji.jpg);
@@ -158,6 +169,29 @@
         padding: 5px 20px;
         background: #FF4347;
     }
+
+    #emojiWrap {
+      display: none;
+      box-sizing: border-box;
+      padding: 0 10px;
+      min-height: 50px;
+      max-height: 200px;
+      background: none;
+      border: 1px solid rgb(238, 238, 238);
+      overflow-y: auto;
+    }
+    #emojiWrap img {
+       width: 40px;
+       height: 40px;
+       margin-left: 5px;
+       transition: .1s transform;
+       transform: translateZ(0);
+    }
+
+    #emojiWrap img:hover {
+      transform: scale(2, 2);
+      transition: .3s transform;
+    }
 </style>
 <link rel="stylesheet" href="style/common.css">
 <body>
@@ -175,15 +209,17 @@
            </div>
 
             <!--聊天鱼塘-->
-           <div class="pool" id="msgPool"></div>
-
-           <hr>
-           <!--输入区-->
+            <div>
+               <div class="pool" id="msgPool"></div>
+                <hr>
+                <!--输入区-->
+                <div id="emojiWrap"></div>
+            </div>
            <div class="controls" >
               <div class="items">
                   <div>
-                       <input id="colorStyle" type="color" placeHolder='#000' title="font color" />
-                      <button id="emoji"></button>
+                     <input id="colorStyle" type="color" placeHolder='#000' title="font color" />
+                      <button id="emojiBtn"></button>
                       <label for="fileImg" id="imgLable">
                             <button></button>
                             <input id="fileImg" type="file"/>
@@ -193,7 +229,6 @@
               </div>
               <textarea id="inputArea" placeHolder="enter to send"></textarea>
               <button id="sendBtn">发送</button>
-              <!-- <div id="emojiWrapper"></div> -->
           </div>
        </div>
    </div>
