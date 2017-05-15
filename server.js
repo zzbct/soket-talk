@@ -26,7 +26,7 @@ function start() {
 
    //数据存储
    var users = []
-   
+
    //socket部分
    socket.on('connection', function(client) {
        //接收并处理客户端发送的login事件

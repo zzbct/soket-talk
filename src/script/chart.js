@@ -38,13 +38,10 @@ Chart.prototype = {
          var reader = new FileReader()
       }
 
-     
-
       login.onclick = function() {
          var nickname = document.getElementById('nickname').value
          //检查昵称是否为空
          if(nickname.trim().length > 0) {
-
             document.getElementsByTagName('h4')[0].textContent = '正在提交英雄帖......'
               //发起login事件
              _this.socket.emit('login',nickname)
@@ -132,6 +129,7 @@ Chart.prototype = {
          _this.printImg(obj,img,color)
        })
    },
+
    printMsg: function(obj,msg,color) {
       msg = this.processEmoji(msg)
       var p = document.createElement('p')
@@ -140,6 +138,7 @@ Chart.prototype = {
       p.style.color = color || '#24284B'
       msgPool.appendChild(p)
    },
+
    printImg: function(obj,img,color) {
       var p = document.createElement('p')
       var date = new Date().toTimeString().substr(0,8)
@@ -147,6 +146,7 @@ Chart.prototype = {
       p.style.color = color || '#24284B';
       msgPool.appendChild(p)
    },
+
    //初始化表情包
    initEmojiWrap: function() {
       var docFragment = document.createDocumentFragment()
@@ -156,6 +156,7 @@ Chart.prototype = {
             var emoji = document.createElement('img')
             emoji.src = '../resource/gif' + j +'/' + i + '.gif'
             emoji.alt = i + j*20
+            emoji.class = 'emoji'
             emojiWrap.appendChild(emoji)
          }
          var br = document.createElement('br')
@@ -163,6 +164,7 @@ Chart.prototype = {
          j++
       }
    },
+
   //预处理携带表情的消息
    processEmoji: function(msg) {
       var reg = /\[emoji:\d+\]/g
@@ -173,7 +175,7 @@ Chart.prototype = {
          for(var i = 0; i < match.length; i++) {
             var index = match[i].slice(7,-1)
             if(index < imgNum) {
-               var str = "<img src = '../resource/gif" + Math.floor(index / 20) +"/" + index % 20 + ".gif'" +"/>"
+               var str = "<img class='emoji' src = '../resource/gif" + Math.floor(index / 20) +"/" + index % 20 + ".gif'" +"/>"
                result = result.replace(match[i],str)
             }
             else {
